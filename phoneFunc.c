@@ -16,10 +16,21 @@ void InputPhoneData(void){
         puts("Can't write - Low Memory");
         return;
     }
+    pData=(phoneData *)malloc(sizeof(phoneData));
     fputs("Name : ",stdout);
     gets(pData->name);
     fputs("Phone Number : ",stdout);
     gets(pData->phoneNum);
+    phoneList[numOfData]=pData;
+    numOfData++;
+    for (int i = 0; i < numOfData; i++) {
+        if(!strcmp(phoneList[i]->name,pData->name)&&!strcmp(phoneList[i]->phoneNum,pData->phoneNum)){
+            puts("Already Exist Data");
+            free(pData);
+            getchar();
+            return;;
+        }
+    }
     phoneList[numOfData]=pData;
     numOfData++;
     puts("Success Insert");
